@@ -23,30 +23,22 @@ class IntJoukko:
         self.alkioiden_lkm = 0
 
     def kuuluu(self, n):
-        on = 0
-
+        luku = 0
         for i in range(0, self.alkioiden_lkm):
             if n == self.ljono[i]:
-                on = on + 1
-
-        if on > 0:
-            return True
-        else:
-            return False
+                luku = luku + 1
+        if luku > 0: return True
+        else: return False
 
     def lisaa(self, n):
-        ei_ole = 0
-
         if self.alkioiden_lkm == 0:
             self.ljono[0] = n
-            self.alkioiden_lkm = self.alkioiden_lkm + 1
+            self.alkioiden_lkm += 1
             return True
-        else:
-            pass
 
         if not self.kuuluu(n):
             self.ljono[self.alkioiden_lkm] = n
-            self.alkioiden_lkm = self.alkioiden_lkm + 1
+            self.alkioiden_lkm += 1
 
             if self.alkioiden_lkm % len(self.ljono) == 0:
                 taulukko_old = self.ljono
@@ -60,7 +52,6 @@ class IntJoukko:
 
     def poista(self, n):
         kohta = -1
-        apu = 0
 
         for i in range(0, self.alkioiden_lkm):
             if n == self.ljono[i]:
@@ -70,9 +61,9 @@ class IntJoukko:
 
         if kohta != -1:
             for j in range(kohta, self.alkioiden_lkm - 1):
-                apu = self.ljono[j]
+                temp = self.ljono[j]
                 self.ljono[j] = self.ljono[j + 1]
-                self.ljono[j + 1] = apu
+                self.ljono[j + 1] = temp
 
             self.alkioiden_lkm = self.alkioiden_lkm - 1
             return True
