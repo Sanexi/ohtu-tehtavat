@@ -6,7 +6,7 @@ class Ostoskori:
         self.tuotteet = []
 
     def tavaroita_korissa(self):
-        pass
+        return len(self.tuotteet)
         # kertoo korissa olevien tavaroiden lukumäärän
         # eli jos koriin lisätty 2 kpl tuotetta "maito", tulee metodin palauttaa 2 
         # samoin jos korissa on 1 kpl tuotetta "maito" ja 1 kpl tuotetta "juusto", tulee metodin palauttaa 2 
