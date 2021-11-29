@@ -24,10 +24,10 @@ class Ostoskori:
 
     def poista_tuote(self, poistettava: Tuote):
         # poistaa tuotteen
-        pass
+        self.tuotteet.pop(poistettava)
 
     def tyhjenna(self):
-        pass
+        self.tuotteet = []
         # tyhjentää ostoskorin
 
     def ostokset(self):
