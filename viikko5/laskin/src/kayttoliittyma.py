@@ -14,6 +14,13 @@ class Kayttoliittyma:
         self._sovellus = sovellus
         self._root = root
 
+        self.komennot = {
+            Komento.SUMMA: self._sovellus.plus(self.arvo),
+            Komento.EROTUS: self._sovellus.miinus(self.arvo),
+            Komento.NOLLAUS: self._sovellus.nollaa(),
+            Komento.KUMOA: self._tulos_var.set(self.vanha_tulos)
+        }
+
     def kaynnista(self):
         self._tulos_var = StringVar()
         self._tulos_var.set(self._sovellus.tulos)
@@ -55,21 +62,14 @@ class Kayttoliittyma:
         self._kumoa_painike.grid(row=2, column=3)
 
     def _suorita_komento(self, komento):
-        arvo = 0
+        self.arvo = 0
 
         try:
-            arvo = int(self._syote_kentta.get())
+            self.arvo = int(self._syote_kentta.get())
         except Exception:
             pass
 
-        if komento == Komento.SUMMA:
-            self._sovellus.plus(arvo)
-        elif komento == Komento.EROTUS:
-            self._sovellus.miinus(arvo)
-        elif komento == Komento.NOLLAUS:
-            self._sovellus.nollaa()
-        elif komento == Komento.KUMOA:
-            pass
+        self.komennot[komento]
 
         self._kumoa_painike["state"] = constants.NORMAL
 
@@ -79,4 +79,5 @@ class Kayttoliittyma:
             self._nollaus_painike["state"] = constants.NORMAL
 
         self._syote_kentta.delete(0, constants.END)
+        self.vanha_tulos = self._tulos_var
         self._tulos_var.set(self._sovellus.tulos)
